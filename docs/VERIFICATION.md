@@ -10,7 +10,7 @@ Executed 2026-10-27 on Windows 11 Home Single Language; Python 3.12, Node 24.14.
 | Backend/API/ML | pytest: **22 passed**, one upstream Starlette/httpx deprecation warning; includes malformed uploads, auth, migrations, split integrity, metrics, reproducibility and imaging limits |
 | Python quality | Ruff lint/format passed; pip check found no broken requirements |
 | Frontend | TypeScript/Vite production build, Prettier format check, ESLint and **3 Vitest tests passed** |
-| Browser | **1 Playwright end-to-end test passed** (43.5 s): actual fixture upload, training, evaluation, JSON download, image/slice controls, themes, mobile navigation |
+| Browser | **1 Playwright end-to-end test passed** (final 54.8 s): actual fixture upload, training, evaluation, JSON download, image/slice controls, consent gating, Escape-key dialog close, themes, mobile navigation |
 | Accessibility / responsive | axe overview WCAG 2 A/AA scan: zero violations in tested screen; 390x844 viewport no document horizontal overflow. Not a comprehensive audit |
 | Live application | API, dev frontend and production preview actually started; health/readiness/login HTTP 200; real computed synthetic workflow |
 | ML CLI | generate / train / evaluate executed; evaluate checks stored model hash and exports recorded evaluation |
@@ -30,7 +30,9 @@ Executed 2026-10-27 on Windows 11 Home Single Language; Python 3.12, Node 24.14.
 
 Sandbox blocked initial network/Git writes and pytest temp creation; scoped elevated execution and workspace temp paths resolved these. Tests started during dependency installation initially lacked Alembic/tsc and were rerun after installation. Vitest initially included Playwright files; unit paths corrected. Browser cold-login wait increased after direct HTTP 200 check; upload harness corrected to preserve downloaded CSV extension. Frontend formatter's unsupported SVG input removed. Vitest and mobile CLI advisories fixed with compatible updates/pins; pip upgraded. An approval-review usage-limit failure briefly blocked one browser command; after user instructed continue the same review path succeeded.
 
-A later browser rerun timed out during login while heavy packaging/scanning was concurrent on the memory-constrained host. Direct API login still returned HTTP 200 in 1.06 s. Idle Three.js rendering was changed to event-driven drawing (continuous rendering only for explicit auto-rotation) to reduce unnecessary software-GPU load; final rerun status is recorded in the handoff.
+A later browser rerun timed out during login while heavy packaging/scanning was concurrent on the memory-constrained host. Direct API login still returned HTTP 200 in 1.06 s. Idle Three.js rendering was changed to event-driven drawing (continuous rendering only for explicit auto-rotation) to reduce unnecessary software-GPU load; the final full browser rerun then passed in 54.8 s and refreshed screenshots.
+
+Gitleaks 8.24.2 staged-diff scans before the baseline, API, frontend/native and documentation commits reported no leaks. All four workflow YAML files parsed successfully. These checks reduce risk; they are not a guarantee of absence of secrets or independent security certification.
 
 ## Blocked, skipped and not implemented
 

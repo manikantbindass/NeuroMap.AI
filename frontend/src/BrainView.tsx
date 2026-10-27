@@ -29,7 +29,7 @@ export function BrainView({
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     el.appendChild(renderer.domElement);
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
+    controls.enableDamping = false;
     controls.autoRotate = rotate;
     controls.autoRotateSpeed = 0.7;
     controls.enablePan = false;
@@ -92,12 +92,15 @@ export function BrainView({
     const grid = new THREE.GridHelper(240, 16, 0x25344a, 0x162338);
     grid.position.y = -95;
     scene.add(grid);
+    const render = () => renderer.render(scene, camera);
+    controls.addEventListener("change", render);
     const observer = new ResizeObserver(() => {
       const w = el.clientWidth,
         h = el.clientHeight;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
+      render();
     });
     observer.observe(el);
     let frame = 0;
@@ -108,10 +111,12 @@ export function BrainView({
       controls.update();
       renderer.render(scene, camera);
     };
-    animate();
+    if (controls.autoRotate) animate();
+    else render();
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
+      controls.removeEventListener("change", render);
       controls.dispose();
       geometry.dispose();
       material.dispose();
