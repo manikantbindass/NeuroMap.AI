@@ -1,0 +1,3 @@
+# References and acknowledgments
+
+Research reviewed through 2026-10-27. The [literature matrix](../docs/LITERATURE_MATRIX.md) is the structured bibliography, including dates, stable links, evidence type and limitations; the [review](../docs/RESEARCH_REVIEW.md) records search methods. Dataset terms and links are in the [catalog](../docs/DATASET_CATALOG.md). No third-party research images, datasets or model weights are bundled. All branding, geometry phantoms and procedural forms are original code-generated assets. Scientific libraries and client dependencies retain their own licenses; see [third-party notices](../docs/THIRD_PARTY_NOTICES.md).

@@ -1,0 +1,3 @@
+# Contributing
+
+Use an issue/PR with a concrete research or engineering problem, reproducible synthetic fixture and validation commands. Follow [installation/testing](docs/INSTALLATION.md). Keep frontend/backend type/schema changes aligned. Run ruff, pytest, frontend lint/unit/build and affected browser tests. Document scientific assumptions, licenses, leakage risks and failure modes. Never commit real participant data, private reports, .env, signing material, weights or credentials. Changes to intended use/model protocol require revised cards and evidence; code alone is not clinical validation. Preserve meaningful commit history and reviewable diffs.

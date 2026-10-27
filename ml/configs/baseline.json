@@ -1,0 +1,1 @@
+{"task":"synthetic-binary-classification","seed":42,"participants":240,"sessions_per_participant":2,"C_candidates":[0.1,1.0,10.0],"threshold":0.5,"bootstrap_resamples":200,"split":[0.6,0.2,0.2]}

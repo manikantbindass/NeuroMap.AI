@@ -1,0 +1,37 @@
+{
+  "name": "neuromap-ai-desktop",
+  "version": "0.1.0",
+  "description": "NeuroMap AI research workspace desktop client",
+  "author": "NeuroMap AI contributors",
+  "license": "MIT",
+  "private": true,
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis --x64"
+  },
+  "build": {
+    "appId": "org.neuromap.research",
+    "productName": "NeuroMap AI",
+    "directories": {
+      "output": "out"
+    },
+    "files": [
+      "main.cjs",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "../assets/branding/icon.ico",
+      "artifactName": "NeuroMap-AI-Setup-Windows-x64.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "devDependencies": {
+    "electron": "45.0.0",
+    "electron-builder": "26.18.0"
+  }
+}

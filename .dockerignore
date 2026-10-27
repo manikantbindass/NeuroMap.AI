@@ -1,0 +1,10 @@
+.git
+.venv
+**/node_modules
+data
+**/dist
+**/__pycache__
+releases/artifacts
+desktop/out
+assets/screenshots
+.env

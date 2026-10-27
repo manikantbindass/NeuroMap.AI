@@ -1,0 +1,68 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    uses: ./.github/workflows/ci.yml
+  web:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - name: Verify version and build
+        run: |
+          test "$GITHUB_REF_NAME" = "v$(node -p "require('./frontend/package.json').version")"
+          npm ci --prefix frontend
+          npm run build --prefix frontend
+          mkdir -p releases/artifacts
+          cd frontend/dist && zip -r ../../releases/artifacts/NeuroMap-AI-Web-0.1.0.zip .
+      - run: git archive --format=zip --output=releases/artifacts/NeuroMap-AI-Source-0.1.0.zip HEAD
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: release-web-source
+          path: releases/artifacts/*.zip
+  windows:
+    needs: validate
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - run: npm ci && npm run dist
+        working-directory: desktop
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: release-windows
+          path: desktop/out/*.exe
+          if-no-files-found: error
+  publish:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [web, windows]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          pattern: release-*
+          merge-multiple: true
+          path: releases/artifacts
+      - run: python scripts/package_release.py
+      - name: Publish verified build outputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            echo 'Existing verified release retained; runner build outputs remain in Actions artifacts.'
+          else
+            gh release create "$GITHUB_REF_NAME" releases/artifacts/* --title "NeuroMap AI $GITHUB_REF_NAME" --notes-file releases/NOTES.md --prerelease --verify-tag
+          fi
