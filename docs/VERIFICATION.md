@@ -21,7 +21,7 @@ Executed 2026-10-27 on Windows 11 Home Single Language; Python 3.12, Node 24.14.
 | Security audits | Frontend/desktop/mobile npm audits reported zero vulnerabilities after fixes; Python audit initially flagged pip 24.0 only, upgraded to 26.2.2, re-audit: no known vulnerabilities |
 | Metadata | Requested GitHub description and research topics updated; original URL retained |
 | Compose syntax | docker compose config --quiet passed |
-| GitHub CI | [CI 40457493240](https://github.com/manikantbindass/AI-for-Personalized-Brain-Mapping-Disease-Prediction/actions/runs/40457493240) and [Security 40457493245](https://github.com/manikantbindass/AI-for-Personalized-Brain-Mapping-Disease-Prediction/actions/runs/40457493245) passed for code commit 41250ad870a57e507c7be0b24a4065c65aaae83e. CI includes successful Linux Docker build/startup/readiness/frontend smoke, Python tests, frontend quality/build, and browser/accessibility flow |
+| GitHub CI | [CI 40457493240](https://github.com/manikantbindass/NeuroMap.AI/actions/runs/40457493240) and [Security 40457493245](https://github.com/manikantbindass/NeuroMap.AI/actions/runs/40457493245) passed for code commit 41250ad870a57e507c7be0b24a4065c65aaae83e. CI includes successful Linux Docker build/startup/readiness/frontend smoke, Python tests, frontend quality/build, and browser/accessibility flow |
 
 ## Actual synthetic result
 

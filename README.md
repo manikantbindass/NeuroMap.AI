@@ -4,11 +4,11 @@
 
 **Explore brain imaging. Understand model predictions. Advance reproducible neuroscience.**
 
-[![CI](https://github.com/manikantbindass/AI-for-Personalized-Brain-Mapping-Disease-Prediction/actions/workflows/ci.yml/badge.svg)](https://github.com/manikantbindass/AI-for-Personalized-Brain-Mapping-Disease-Prediction/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/manikantbindass/AI-for-Personalized-Brain-Mapping-Disease-Prediction?include_prereleases)](https://github.com/manikantbindass/AI-for-Personalized-Brain-Mapping-Disease-Prediction/releases)
+[![CI](https://github.com/manikantbindass/NeuroMap.AI/actions/workflows/ci.yml/badge.svg)](https://github.com/manikantbindass/NeuroMap.AI/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/manikantbindass/NeuroMap.AI?include_prereleases)](https://github.com/manikantbindass/NeuroMap.AI/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-78e0cb)](LICENSE)
 
-[User guide](docs/user-guide/README.md) · [Installation](docs/INSTALLATION.md) · [Research review](docs/RESEARCH_REVIEW.md) · [Verification](docs/VERIFICATION.md) · [Releases](https://github.com/manikantbindass/AI-for-Personalized-Brain-Mapping-Disease-Prediction/releases)
+[User guide](docs/user-guide/README.md) · [Installation](docs/INSTALLATION.md) · [Research review](docs/RESEARCH_REVIEW.md) · [Verification](docs/VERIFICATION.md) · [Releases](https://github.com/manikantbindass/NeuroMap.AI/releases)
 
 > Research and education only. No clinical model, disease diagnosis, clinical risk prediction, regulatory clearance or independent clinical validation. The classifier uses **synthetic tabular features**, not MRI-derived disease features.
 
@@ -50,7 +50,7 @@ Real captures of the running application with **synthetic data**, not clinical r
 
 ## Demo and downloads
 
-Run locally and choose **Create demo**, then **Run analysis**. No hosted public demo is claimed. Download only assets listed on the [actual release page](https://github.com/manikantbindass/AI-for-Personalized-Brain-Mapping-Disease-Prediction/releases). Source/native project generation does not imply a successful signed binary. Consult the release manifest and [signing guide](docs/RELEASE_AND_SIGNING.md).
+Run locally and choose **Create demo**, then **Run analysis**. No hosted public demo is claimed. Download only assets listed on the [actual release page](https://github.com/manikantbindass/NeuroMap.AI/releases). Source/native project generation does not imply a successful signed binary. Consult the release manifest and [signing guide](docs/RELEASE_AND_SIGNING.md).
 
 ## Architecture
 
@@ -201,7 +201,7 @@ Native source is under mobile/ios; macOS/Xcode and Apple signing/provisioning ar
 
 ## Releases and checksums
 
-[GitHub Releases](https://github.com/manikantbindass/AI-for-Personalized-Brain-Mapping-Disease-Prediction/releases) host only actual produced artifacts. Compare downloaded SHA-256 to SHA256SUMS.txt and byte size/version to release-manifest.json. Automated release builds gate publication on CI and produce web/source/Windows outputs on suitable runners. Mobile source validation is separate; signing remains an owner-supplied prerequisite. [Artifact policy](releases/README.md).
+[GitHub Releases](https://github.com/manikantbindass/NeuroMap.AI/releases) host only actual produced artifacts. Compare downloaded SHA-256 to SHA256SUMS.txt and byte size/version to release-manifest.json. Automated release builds gate publication on CI and produce web/source/Windows outputs on suitable runners. Mobile source validation is separate; signing remains an owner-supplied prerequisite. [Artifact policy](releases/README.md).
 
 ## Troubleshooting and FAQ
 
@@ -217,6 +217,6 @@ Harden worker isolation, durable dispatch and institutional operations; validate
 
 ## Disclaimer, contact and issue reporting
 
-This application is not clinically validated and is not intended for patient decisions. No clinical-model accuracy, regulatory compliance or production scalability is asserted. [Known limits](docs/SAFETY_AND_LIMITATIONS.md). Report software issues with synthetic reproductions through [GitHub Issues](https://github.com/manikantbindass/AI-for-Personalized-Brain-Mapping-Disease-Prediction/issues); use private channels for vulnerabilities and never attach sensitive data.
+This application is not clinically validated and is not intended for patient decisions. No clinical-model accuracy, regulatory compliance or production scalability is asserted. [Known limits](docs/SAFETY_AND_LIMITATIONS.md). Report software issues with synthetic reproductions through [GitHub Issues](https://github.com/manikantbindass/NeuroMap.AI/issues); use private channels for vulnerabilities and never attach sensitive data.
 
 ![NeuroMap AI matching closing graphic: research first, evidence always](assets/branding/footer.svg)
