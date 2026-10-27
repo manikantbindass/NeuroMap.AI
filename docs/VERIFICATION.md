@@ -21,6 +21,7 @@ Executed 2026-10-27 on Windows 11 Home Single Language; Python 3.12, Node 24.14.
 | Security audits | Frontend/desktop/mobile npm audits reported zero vulnerabilities after fixes; Python audit initially flagged pip 24.0 only, upgraded to 26.2.2, re-audit: no known vulnerabilities |
 | Metadata | Requested GitHub description and research topics updated; original URL retained |
 | Compose syntax | docker compose config --quiet passed |
+| GitHub CI | [CI 40457493240](https://github.com/manikantbindass/AI-for-Personalized-Brain-Mapping-Disease-Prediction/actions/runs/40457493240) and [Security 40457493245](https://github.com/manikantbindass/AI-for-Personalized-Brain-Mapping-Disease-Prediction/actions/runs/40457493245) passed for code commit 41250ad870a57e507c7be0b24a4065c65aaae83e. CI includes successful Linux Docker build/startup/readiness/frontend smoke, Python tests, frontend quality/build, and browser/accessibility flow |
 
 ## Actual synthetic result
 
@@ -38,13 +39,13 @@ Gitleaks 8.24.2 staged-diff scans before the baseline, API, frontend/native and 
 
 | Gate | Blocker / remaining requirement |
 |---|---|
-| Docker image/runtime | Docker 29.4 client exists, daemon/named pipe unavailable. Enable Linux engine and run Compose/CI smoke |
+| Local Docker runtime | Local Docker 29.4 daemon/named pipe unavailable. Linux Docker topology build/startup **passed on GitHub CI**; enable Linux engine for local Compose use |
 | Android APK | No Android SDK. Build attempt fails at invalid JAVA_HOME pointing to nonexistent jdk-22; java command is 25. Configure compatible JDK/SDK or execute Android CI. No APK produced |
 | iOS IPA | No macOS/Xcode/Apple signing environment on Windows. Native source and macOS simulator workflow provided; signed archive/export remains owner-provisioned. No IPA produced |
 | Windows installation/signing | Unpacked launch tested; full installed upgrade/uninstall and signing not verified. Unsigned distribution explicitly disclosed |
 | Public deployment | No hosted frontend/API or public demo configured |
 | Clinical features | No authorized disease cohort or weights; no disease model, registration, segmentation, parcellation, site holdout, external validation or clinical calibration |
 | Production assurance | No multi-tenant auth, distributed queue/limits, isolated parser process, formal penetration test, broad stress test or restore drill |
-| Remote CI | Configured workflows are not proof of successful remote runs; inspect actual Actions results |
+| Optional mobile dispatch | Attempt returned HTTP 404 because mobile.yml is not on the default branch. After authorized PR merge, dispatch the Android unsigned-release and macOS simulator workflow; distribution signing remains separate |
 
 Commit/push/PR, tag and exact release asset links/hashes are recorded in the final handoff and actual GitHub release manifest. This is a scoped research foundation; the larger advanced/clinical roadmap is not complete.
