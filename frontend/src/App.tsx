@@ -35,7 +35,15 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { api, download, json, percent, setToken } from "./api";
+import {
+  api,
+  download,
+  getApiOrigin,
+  json,
+  percent,
+  setApiOrigin,
+  setToken,
+} from "./api";
 import { BrainView, Slice } from "./BrainView";
 
 type Dataset = {
@@ -66,6 +74,7 @@ const pages = [
 export default function App() {
   const [signed, setSigned] = useState(false),
     [password, setPassword] = useState(""),
+    [serverOrigin, setServerOrigin] = useState(getApiOrigin),
     [page, setPage] = useState("Overview");
   const [datasets, setDatasets] = useState<Dataset[]>([]),
     [jobs, setJobs] = useState<Job[]>([]),
@@ -332,7 +341,7 @@ export default function App() {
         </div>
         <section className="login">
           <span className="tag">
-            <FlaskConical size={13} /> RESEARCH EDITION · 0.1.0
+            <FlaskConical size={13} /> RESEARCH EDITION · 0.1.1
           </span>
           <h2>Welcome to NeuroMap AI</h2>
           <p>
@@ -343,6 +352,7 @@ export default function App() {
             onSubmit={(e) => {
               e.preventDefault();
               act(async () => {
+                setApiOrigin(serverOrigin);
                 const r = await json("/auth/login", {
                   method: "POST",
                   body: JSON.stringify({ password }),
@@ -353,6 +363,22 @@ export default function App() {
               });
             }}
           >
+            <details className="server-connection">
+              <summary>Server connection</summary>
+              <label htmlFor="api-server">API server address</label>
+              <input
+                id="api-server"
+                type="url"
+                value={serverOrigin}
+                placeholder="https://your-research-server.example"
+                onChange={(e) => setServerOrigin(e.target.value)}
+                autoComplete="url"
+              />
+              <small>
+                Mobile clients require your own HTTPS backend. Leave blank for
+                this website’s server. The server must allow your app’s origin.
+              </small>
+            </details>
             <label htmlFor="password">Workspace password</label>
             <input
               id="password"
@@ -461,7 +487,7 @@ export default function App() {
             <LogOut size={16} /> Sign out
           </button>
           <small>
-            NEUROMAP AI <span>v0.1.0</span>
+            NEUROMAP AI <span>v0.1.1</span>
           </small>
         </div>
       </aside>

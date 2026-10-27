@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "Please cite this software and the underlying methods/datasets used in your work."
 title: "NeuroMap AI: research imaging inspection and synthetic ML workflows"
-version: 0.1.0
+version: 0.1.1
 date-released: 2026-10-27
 authors:
   - name: "NeuroMap AI contributors"

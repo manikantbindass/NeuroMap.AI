@@ -64,7 +64,7 @@ def create_app(settings=None):
 
     app = FastAPI(
         title="NeuroMap AI",
-        version="0.1.0",
+        version="0.1.1",
         lifespan=lifespan,
         description="Single-user research workspace. Synthetic ML and bounded image inspection. No clinical predictions.",
     )
@@ -146,7 +146,7 @@ def create_app(settings=None):
 
     @app.get("/api/health")
     def health():
-        return {"status": "ok", "version": "0.1.0", "clinical_inference": False}
+        return {"status": "ok", "version": "0.1.1", "clinical_inference": False}
 
     @app.get("/api/ready")
     def ready():
@@ -413,7 +413,7 @@ def create_app(settings=None):
                 raise HTTPException(409, "Report is available after completion")
             payload = {
                 "application": "NeuroMap AI",
-                "version": "0.1.0",
+                "version": "0.1.1",
                 "job_id": j.id,
                 "created": j.created,
                 "result": json.loads(j.result),

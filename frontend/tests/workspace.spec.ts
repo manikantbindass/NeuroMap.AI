@@ -12,6 +12,13 @@ test("real synthetic upload → analysis → evaluation → report; responsive n
   await page
     .getByLabel("Workspace password")
     .fill(process.env.NEUROMAP_PASSWORD!);
+  await page.getByText("Server connection", { exact: true }).click();
+  await page.getByLabel("API server address").fill("http://remote.example");
+  await page.getByRole("button", { name: "Open workspace" }).click();
+  await expect(page.getByRole("alert")).toContainText(
+    "Use an HTTPS server origin",
+  );
+  await page.getByLabel("API server address").fill("");
   await page.getByRole("button", { name: "Open workspace" }).click();
   await expect(
     page.getByRole("heading", { name: "Research overview" }),

@@ -1,6 +1,6 @@
 # Release and native build guide
 
-Version 0.1.0 is a research foundation prerelease. Read VERIFICATION.md for actual artifacts and unverified targets. Never label generated source as a successful APK/IPA build.
+Version 0.1.1 adds native server selection and the signed Android build path. Read VERIFICATION.md for actual outcomes. Never label generated source as a successful APK/IPA build. The 0.1.0 release remains an immutable historical snapshot.
 
 ## Web
 
@@ -18,6 +18,10 @@ Genuine native project lives under mobile/android. Configure VITE_API_URL with a
 
 For signed distribution create a private keystore outside the repository. Supply a signingConfig through protected Gradle properties/environment or a secret-backed CI init script; run assembleRelease, then verify `apksigner verify --verbose` and SHA-256 before publication. Never commit keystores/passwords. CI mobile workflow compiles unsigned candidate/source tests only; signed release automation remains dependent on owner provisioning. No universal signed APK is promised by this workflow.
 
+The new **Signed Android APK** workflow separately builds a non-debuggable release candidate, zipaligns it, signs with alias `neuromap-release`, verifies its signature and package contents, and uploads `release-android`. It requires `ANDROID_KEYSTORE_BASE64`, `ANDROID_STORE_PASSWORD` and `ANDROID_KEY_PASSWORD` in encrypted GitHub Secrets. The tag release workflow now waits for Android along with web/Windows before publication. Credentials must be explicitly authorized/provided; no persistent identity is generated silently. Retain the private signing key to maintain compatibility of future updates. See [Android signing guidance](https://developer.android.com/studio/publish/app-signing) and [apksigner](https://developer.android.com/tools/apksigner).
+
+In the installed APK, expand **Server connection**, enter your own HTTPS API origin, and use the password configured on that server. Set its `NEUROMAP_ORIGINS` to include `https://localhost`. The APK does not connect to the developer's loopback-only server or embed a demo credential. The browser deployment can leave the server address blank for same-origin operation.
+
 ## iOS
 
 Genuine native Xcode project lives under mobile/ios. Configure HTTPS API and capacitor://localhost CORS, rebuild and `npx cap sync ios`. On macOS/Xcode: `xcodebuild -project mobile/ios/App/App.xcodeproj -scheme App -sdk iphonesimulator -configuration Release CODE_SIGNING_ALLOWED=NO build`. CI attempts simulator compilation; this produces no IPA.
@@ -29,7 +33,9 @@ xcodebuild -project mobile/ios/App/App.xcodeproj -scheme App -configuration Rele
 xcodebuild -exportArchive -archivePath build/NeuroMap.xcarchive -exportOptionsPlist /secure/ExportOptions.plist -exportPath build/export
 ```
 
-ExportOptions must match the real distribution method/provisioning. Verify signatures/profiles and device/distribution eligibility. Windows cannot execute these steps. Certificate/provisioning setup and signed IPA workflow are not implemented or tested without credentials. An IPA is not a universal installation mechanism or App Store approval.
+ExportOptions must match the real distribution method/provisioning. Verify signatures/profiles and device/distribution eligibility. Windows cannot execute these steps. Certificate/provisioning setup and signed IPA execution remain unverified without credentials. An IPA is not a universal installation mechanism or App Store approval.
+
+**Signed iOS IPA** is now a manually dispatched workflow accepting an existing release tag and distribution method. It requires owner-provided `IOS_DISTRIBUTION_P12_BASE64`, `IOS_P12_PASSWORD`, `IOS_PROFILE_BASE64`, and `APPLE_TEAM_ID` secrets. The profile must match `org.neuromap.research`. It imports the supplied certificate into a temporary runner keychain, archives and verifies the signed app, exports an actual IPA, and only then attaches the IPA plus a supplemental iOS checksum/provenance manifest to that release. This path is unverified until actual Apple credentials are supplied; it never creates a placeholder IPA or an `.ips` crash-report file. Installation eligibility follows the supplied Apple provisioning method.
 
 ## GitHub release flow
 

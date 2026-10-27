@@ -22,8 +22,12 @@ jobs:
           npm ci --prefix frontend
           npm run build --prefix frontend
           mkdir -p releases/artifacts
-          cd frontend/dist && zip -r ../../releases/artifacts/NeuroMap-AI-Web-0.1.0.zip .
-      - run: git archive --format=zip --output=releases/artifacts/NeuroMap-AI-Source-0.1.0.zip HEAD
+          VERSION=$(node -p "require('./frontend/package.json').version")
+          cd frontend/dist && zip -r "../../releases/artifacts/NeuroMap-AI-Web-$VERSION.zip" .
+      - name: Source archive
+        run: |
+          VERSION=$(node -p "require('./frontend/package.json').version")
+          git archive --format=zip --output="releases/artifacts/NeuroMap-AI-Source-$VERSION.zip" HEAD
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: release-web-source
@@ -43,9 +47,13 @@ jobs:
           name: release-windows
           path: desktop/out/*.exe
           if-no-files-found: error
+  android:
+    needs: validate
+    uses: ./.github/workflows/android-build.yml
+    secrets: inherit
   publish:
     if: startsWith(github.ref, 'refs/tags/')
-    needs: [web, windows]
+    needs: [web, windows, android]
     runs-on: ubuntu-latest
     permissions:
       contents: write

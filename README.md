@@ -22,7 +22,7 @@ Support reproducible engineering and careful exploration: NIfTI geometry, voxel/
 
 ## Current status and features
 
-Version **0.1.0**, research foundation prerelease. See [actual quality-gate outcomes](docs/VERIFICATION.md).
+Version **0.1.1**, research foundation prerelease. See [actual quality-gate outcomes](docs/VERIFICATION.md). Native clients can select their own HTTPS API under **Server connection** on the login screen; a backend is required.
 
 - Authenticated single-owner workspace; in-memory browser sessions, logout and restart invalidation.
 - Validated uploads with consent, bounded formats/resources and private server storage.
