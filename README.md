@@ -52,6 +52,8 @@ Real captures of the running application with **synthetic data**, not clinical r
 
 Run locally and choose **Create demo**, then **Run analysis**. No hosted public demo is claimed. Download only assets listed on the [actual release page](https://github.com/manikantbindass/NeuroMap.AI/releases). Source/native project generation does not imply a successful signed binary. Consult the release manifest and [signing guide](docs/RELEASE_AND_SIGNING.md).
 
+Version 0.1.1 downloads: [Windows x64 installer](https://github.com/manikantbindass/NeuroMap.AI/releases/download/v0.1.1/NeuroMap-AI-Setup-Windows-x64.exe) (unsigned publisher) · [signed Android APK](https://github.com/manikantbindass/NeuroMap.AI/releases/download/v0.1.1/NeuroMap-AI-Android-universal.apk) · [checksums](https://github.com/manikantbindass/NeuroMap.AI/releases/download/v0.1.1/SHA256SUMS.txt). Both clients require a running server. No iOS IPA is available until Apple distribution signing/provisioning is supplied.
+
 ## Architecture
 
 ```mermaid
@@ -193,7 +195,7 @@ Use an actual published x64 installer only if listed in the release manifest. St
 
 ## Android installation
 
-Native source is under mobile/android. No signed installable APK is implied. Configure HTTPS API, build web, sync Capacitor, use compatible JDK/Android SDK, create a release candidate and sign/verify with a private keystore before distribution. Debug and unsigned release outputs must remain clearly labeled. [Exact requirements](docs/RELEASE_AND_SIGNING.md#android).
+The signed 0.1.1 APK is available above. Install it according to your device's policy for apps obtained outside an app store, expand **Server connection**, and enter your own HTTPS API origin. The backend must allow `https://localhost` in its CORS origins; use that server's workspace password. The APK contains no offline ML server or developer demo credential. Native source is under mobile/android; [build/signing requirements](docs/RELEASE_AND_SIGNING.md#android) describe reproducible updates. Hardware/emulator runtime testing is still pending.
 
 ## iOS signing limitations
 

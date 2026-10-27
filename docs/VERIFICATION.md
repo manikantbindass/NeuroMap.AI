@@ -1,5 +1,16 @@
 # Verification and acceptance record
 
+## Native release 0.1.1 — 2026-10-27
+
+- Source revision: `3db5312` (tag `v0.1.1`). The login screen accepts a validated HTTPS backend origin for installed mobile clients; five frontend unit tests, 22 backend/ML tests, lint/format/type/build and the extended browser flow passed. Browser run completed in 49.6 s after restarting the local Vite proxy; an earlier run saw 404 because a configuration reload had dropped the dev proxy.
+- [Signed Android build](https://github.com/manikantbindass/NeuroMap.AI/actions/runs/40463648576) passed. Release lint, non-debuggable/package checks, zip alignment, APK Signature Scheme v2/v3 verification and archive-integrity checks passed. The original SDK PATH failure was fixed using the runner's explicit SDK-tool path.
+- The owner explicitly approved generating a persistent RSA-3072 Android signing identity and storing its credentials in encrypted GitHub Secrets. A private backup remains under ignored `data/android-signing`; never publish it. Public certificate SHA-256: `f31a0f9d9b276b1ffb135705c591586a6c5b8950ec24ef5ef677a50266971d69`. Future updates must retain signing continuity. No private key or password is in Git.
+- [Tag release workflow](https://github.com/manikantbindass/NeuroMap.AI/actions/runs/40463720854) gates publication on Linux Docker/quality/browser, Windows packaging and signed Android builds. The actual release manifest records each produced file's hash and source commit. Android hardware/emulator install and device-to-HTTPS-backend interaction have not been tested; compilation/signature verification is not an end-to-end device certification.
+- iOS simulator compilation passed on the macOS job in [mobile source validation](https://github.com/manikantbindass/NeuroMap.AI/actions/runs/40463535097). The original Android job in that run failed at SDK PATH setup; the separate corrected signed Android run passed. No device IPA was produced: the owner confirmed Apple distribution credentials/provisioning are unavailable. `ios-distribution.yml` is a prepared, unexecuted signed archive/export path requiring those credentials; it refuses missing secrets and never emits a fake IPA.
+- Windows builds are genuine NSIS x64 installers but remain unsigned by an Authenticode publisher certificate. Both native clients require a functioning backend; no offline inference or embedded demo credential is claimed.
+
+The following sections preserve the initial 0.1.0 audit and verification history; platform blockers described there may be superseded by the 0.1.1 evidence above.
+
 Executed 2026-10-27 on Windows 11 Home Single Language; Python 3.12, Node 24.14.1, npm 11.11.0, Git 2.55.0. About 16 GiB memory (under 1 GiB free during initial audit), D: about 51 GiB free. No CUDA functionality required or asserted.
 
 ## Passed locally
