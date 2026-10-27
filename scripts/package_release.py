@@ -2,6 +2,8 @@
 
 import hashlib
 import json
+import subprocess
+from datetime import datetime, timezone
 from pathlib import Path
 
 folder = Path("releases/artifacts")
@@ -25,7 +27,11 @@ if not assets or any(a["bytes"] == 0 for a in assets):
     json.dumps(
         {
             "application": "NeuroMap AI",
-            "version": "0.1.0",
+            "version": json.loads(Path("frontend/package.json").read_text())["version"],
+            "source_commit": subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], text=True
+            ).strip(),
+            "manifest_created_utc": datetime.now(timezone.utc).isoformat(),
             "assets": assets,
             "clinical_model": False,
         },
