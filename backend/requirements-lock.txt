@@ -40,7 +40,7 @@ pluggy==1.7.0
 py-serializable==2.1.0
 pydantic==2.14.1
 pydantic-settings==2.16.1
-pydantic_core==2.50.1
+pydantic_core==2.50.2
 Pygments==2.21.0
 pyparsing==3.3.3
 pytest==9.1.1
